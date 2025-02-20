@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ReviewService Test getAllReviews should return all created review 1`] = `
+[
+  {
+    "comments": "comments",
+    "createdAt": "2025-02-20",
+    "id": "id",
+    "name": "name",
+    "petName": "petName",
+    "rating": 5,
+    "updatedAt": "2025-02-20",
+  },
+]
+`;
+
 exports[`ReviewService Test submitReview should return submitted review 1`] = `
 {
   "comments": "comments",

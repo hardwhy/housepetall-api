@@ -15,4 +15,8 @@ export class ReviewService implements IReviewService {
 
     return await this.repository.create(review);
   }
+
+  async getAllReviews(): Promise<Review[]> {
+    return await this.repository.findAll();
+  }
 }
