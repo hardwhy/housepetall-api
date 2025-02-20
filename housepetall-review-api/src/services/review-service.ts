@@ -1,6 +1,7 @@
 import { Review } from '../models/review';
 import { IReviewService } from './interfaces/i-review-service';
 import { IReviewRepository } from '../repositories/interfaces/i-review-repository';
+import { randomUUID } from 'crypto';
 
 export class ReviewService implements IReviewService {
   constructor(private repository: IReviewRepository) {}
@@ -11,6 +12,7 @@ export class ReviewService implements IReviewService {
       ...data,
       createdAt: createdAt,
       updatedAt: createdAt,
+      id: randomUUID()
     };
 
     return await this.repository.create(review);
