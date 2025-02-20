@@ -169,4 +169,19 @@ describe('ReviewController', () => {
       });
     });
   });
+    
+    it('should return 200 and the List of reviews when retrieve success', async () => {
+        //Given
+        reviewService.getAllReviews = jest.fn().mockResolvedValue([reviewWithCreatedAt]);
+        mockRequest = {};
+        //When
+        await controller.getAllReviews(
+            mockRequest as Request,
+            mockResponse as Response,
+        );
+
+        expect(mockResponse.status).toBe(200);
+        expect(reviewService.getAllReviews).toHaveBeenCalled();
+        expect(mockResponse.json).toBe([review]);
+    })
 });

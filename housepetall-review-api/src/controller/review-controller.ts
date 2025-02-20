@@ -25,4 +25,19 @@ export class ReviewController {
       });
     }
   }
+
+  async getAllReviews(req: Request, res: Response): Promise<void> {
+    try {
+      const feedback = await this.reviewService.getAllReviews();
+      res.status(200).json({
+        count: feedback.length,
+        feedback,
+      });
+    } catch (error) {
+      res.status(500).json({
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      });
+    }
+  }
 }
