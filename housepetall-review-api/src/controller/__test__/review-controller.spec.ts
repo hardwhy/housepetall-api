@@ -117,22 +117,39 @@ describe('ReviewController', () => {
         error: 'Rating must be an integer between 1 and 5',
       });
     });
-      
-      it('should return 400 if owner petname missed matching the data type', async () => {
-        //Given
-        mockRequest = { body: { ...mockRequest.body, petName: 112 } };
 
-        //When
-        await controller.submitReview(
-          mockRequest as Request,
-          mockResponse as Response
-        );
+    it('should return 400 if owner petname missed matching the data type', async () => {
+      //Given
+      mockRequest = { body: { ...mockRequest.body, petName: 112 } };
 
-        //Then
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
-        expect(mockResponse.json).toHaveBeenCalledWith({
-          error: 'Name and pet name must be strings',
-        });
+      //When
+      await controller.submitReview(
+        mockRequest as Request,
+        mockResponse as Response
+      );
+
+      //Then
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        error: 'Name and pet name must be strings',
       });
+    });
+
+    it('should return 400 if owner name missed matching the data type', async () => {
+      //Given
+      mockRequest = { body: { ...mockRequest.body, name: 112 } };
+
+      //When
+      await controller.submitReview(
+        mockRequest as Request,
+        mockResponse as Response
+      );
+
+      //Then
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        error: 'Name and pet name must be strings',
+      });
+    });
   });
 });
