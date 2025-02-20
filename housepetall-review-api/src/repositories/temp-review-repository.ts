@@ -8,4 +8,8 @@ export class TempReviewRepository implements IReviewRepository {
     this.storage.push(review);
     return review;
   }
+
+  async findAll(): Promise<Review[]> {
+    return [...this.storage];
+  }
 }
