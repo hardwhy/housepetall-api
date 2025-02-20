@@ -11,5 +11,9 @@ export function validateReviewData(data: Partial<Review>): string | null {
     return 'Rating must be an integer between 1 and 5';
   }
 
+  if (typeof name !== 'string' || typeof petName !== 'string') {
+    return 'Name and pet name must be strings';
+  }
+
   return null;
 }
