@@ -1,4 +1,4 @@
 export class BaseModel {
   createdAt?: string;
-  createdBy?: string;
+  updatedAt?: string;
 }
