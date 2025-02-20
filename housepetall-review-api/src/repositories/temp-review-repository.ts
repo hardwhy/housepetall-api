@@ -5,7 +5,7 @@ export class TempReviewRepository implements IReviewRepository {
   private storage: Review[] = [];
 
   async create(review: Review): Promise<Review> {
-    this.storage.push(review);
+    this.storage = [review, ...this.storage];
     return review;
   }
 
