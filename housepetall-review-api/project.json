@@ -1,0 +1,63 @@
+{
+  "name": "housepetall-review-api",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "housepetall-review-api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/housepetall-review-api",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "housepetall-review-api/src/main.ts",
+        "tsConfig": "housepetall-review-api/tsconfig.app.json",
+        "assets": ["housepetall-review-api/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "housepetall-review-api:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "housepetall-review-api:build:development"
+        },
+        "production": {
+          "buildTarget": "housepetall-review-api:build:production"
+        }
+      }
+    },
+    "test": {
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
+}
