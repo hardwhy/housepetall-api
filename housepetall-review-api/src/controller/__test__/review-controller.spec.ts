@@ -79,5 +79,26 @@ describe('ReviewController', () => {
         details: 'Database error',
       });
     });
+
+    it('should return 400 if request body missing required field', async () => {
+      //Given
+      const { name, ...rest } = review;
+      console.log('removed item', name);
+
+      mockRequest = { body: rest };
+
+      //When
+      await controller.submitReview(
+        mockRequest as Request,
+        mockResponse as Response
+      );
+
+      //Then
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        error:
+          'Missing required fields. Name, pet name, and rating are required.',
+      });
+    });
   });
 });
