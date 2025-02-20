@@ -13,8 +13,11 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+    "baseUrl": ".","paths": {
+      "@review/*": [
+        "housepetall-review-api/src/*"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
