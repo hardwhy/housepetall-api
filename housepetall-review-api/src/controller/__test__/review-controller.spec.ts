@@ -39,7 +39,7 @@ describe('ReviewController', () => {
       json: jest.fn(),
     };
   });
-    
+
   describe('submitReview', () => {
     it('should return 201 when success', async () => {
       //Given
@@ -57,6 +57,26 @@ describe('ReviewController', () => {
       expect(mockResponse.json).toHaveBeenCalledWith({
         message: 'Review submitted successfully',
         review: reviewWithCreatedAt,
+      });
+    });
+
+    it('should return 500 if an error occurs', async () => {
+      //Given
+      const mockError = new Error('Database error');
+      reviewService.submitReview = jest.fn().mockRejectedValue(mockError);
+
+      //When
+      await controller.submitReview(
+        mockRequest as Request,
+        mockResponse as Response
+      );
+
+      //Then
+      expect(reviewService.submitReview).toHaveBeenCalledWith(mockRequest.body);
+      expect(mockResponse.status).toHaveBeenCalledWith(500);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        error: 'Internal server error',
+        details: 'Database error',
       });
     });
   });
