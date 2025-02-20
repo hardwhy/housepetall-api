@@ -15,5 +15,9 @@ export function validateReviewData(data: Partial<Review>): string | null {
     return 'Name and pet name must be strings';
   }
 
+  if (comments !== undefined && typeof comments !== 'string') {
+    return 'Comments must be a string';
+  }
+
   return null;
 }
