@@ -20,7 +20,7 @@ PORT=3000
 Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/hardwhy/housepetall-api.git # or use git@github.com:hardwhy/housepetall-api.git
-cd housepetall-api
+code housepetall-api #if you are using VSCode
 npm install
 ```
 
