@@ -10,9 +10,9 @@ Ensure you have the following installed:
 - **Nx 18.0.4**
 
 ### 🔧 Environment Variables
-Configure the required environment variables before running the project. Example:
+Configure the required environment variables before running the project:
 ```bash
-HOST=localhost
+HOST=0.0.0.0
 PORT=3000
 ```
 
