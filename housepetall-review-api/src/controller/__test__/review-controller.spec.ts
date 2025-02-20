@@ -100,5 +100,22 @@ describe('ReviewController', () => {
           'Missing required fields. Name, pet name, and rating are required.',
       });
     });
+
+    it('should return 400 if rating missed matching the data type', async () => {
+      //Given
+      mockRequest = { body: { ...mockRequest.body, rating: '4' } };
+
+      //When
+      await controller.submitReview(
+        mockRequest as Request,
+        mockResponse as Response
+      );
+
+      //Then
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        error: 'Rating must be an integer between 1 and 5',
+      });
+    });
   });
 });
