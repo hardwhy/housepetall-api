@@ -169,19 +169,41 @@ describe('ReviewController', () => {
       });
     });
   });
-    
-    it('should return 200 and the List of reviews when retrieve success', async () => {
-        //Given
-        reviewService.getAllReviews = jest.fn().mockResolvedValue([reviewWithCreatedAt]);
-        mockRequest = {};
-        //When
-        await controller.getAllReviews(
-            mockRequest as Request,
-            mockResponse as Response,
-        );
 
-        expect(mockResponse.status).toBe(200);
-        expect(reviewService.getAllReviews).toHaveBeenCalled();
-        expect(mockResponse.json).toBe([review]);
-    })
+  describe('getAllReviews', () => {
+    it('should return 200 and the List of reviews when retrieve success', async () => {
+      //Given
+      reviewService.getAllReviews = jest
+        .fn()
+        .mockResolvedValue([reviewWithCreatedAt]);
+      mockRequest = {};
+      //When
+      await controller.getAllReviews(
+        mockRequest as Request,
+        mockResponse as Response
+      );
+
+      expect(mockResponse.status).toBe(200);
+      expect(reviewService.getAllReviews).toHaveBeenCalled();
+      expect(mockResponse.json).toBe([review]);
+    });
+    it('should return 500 if an error occurs', async () => {
+      //Given
+      const mockError = new Error('Database error');
+      reviewService.getAllReviews = jest.fn().mockRejectedValue(mockError);
+
+      //When
+      await controller.getAllReviews(
+        mockRequest as Request,
+        mockResponse as Response
+      );
+
+      //Then
+      expect(mockResponse.status).toHaveBeenCalledWith(500);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        error: 'Internal server error',
+        details: 'Database error',
+      });
+    });
+  });
 });
